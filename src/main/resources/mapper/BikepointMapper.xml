@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zq.ssm.dao.BikepointMapper">
+    <resultMap id="BaseResultMap" type="com.zq.ssm.model.Bikepoint">
+        <id column="bikepoint_id" property="bikepointId" jdbcType="INTEGER"/>
+        <result column="manager_id" property="managerId" jdbcType="INTEGER"/>
+        <result column="point_name" property="pointName" jdbcType="VARCHAR"/>
+        <result column="area_name" property="areaName" jdbcType="VARCHAR"/>
+        <result column="point_row" property="pointRow" jdbcType="DOUBLE"/>
+        <result column="point_col" property="pointCol" jdbcType="DOUBLE"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    bikepoint_id, manager_id, point_name, area_name, point_row, point_col
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from bikepoint
+        where bikepoint_id = #{bikepointId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from bikepoint
+    where bikepoint_id = #{bikepointId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.zq.ssm.model.Bikepoint">
+    insert into bikepoint (bikepoint_id, manager_id, point_name, 
+      area_name, point_row, point_col
+      )
+    values (#{bikepointId,jdbcType=INTEGER}, #{managerId,jdbcType=INTEGER}, #{pointName,jdbcType=VARCHAR}, 
+      #{areaName,jdbcType=VARCHAR}, #{pointRow,jdbcType=DOUBLE}, #{pointCol,jdbcType=DOUBLE}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.zq.ssm.model.Bikepoint">
+        insert into bikepoint
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="bikepointId != null">
+                bikepoint_id,
+            </if>
+            <if test="managerId != null">
+                manager_id,
+            </if>
+            <if test="pointName != null">
+                point_name,
+            </if>
+            <if test="areaName != null">
+                area_name,
+            </if>
+            <if test="pointRow != null">
+                point_row,
+            </if>
+            <if test="pointCol != null">
+                point_col,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="bikepointId != null">
+                #{bikepointId,jdbcType=INTEGER},
+            </if>
+            <if test="managerId != null">
+                #{managerId,jdbcType=INTEGER},
+            </if>
+            <if test="pointName != null">
+                #{pointName,jdbcType=VARCHAR},
+            </if>
+            <if test="areaName != null">
+                #{areaName,jdbcType=VARCHAR},
+            </if>
+            <if test="pointRow != null">
+                #{pointRow,jdbcType=DOUBLE},
+            </if>
+            <if test="pointCol != null">
+                #{pointCol,jdbcType=DOUBLE},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zq.ssm.model.Bikepoint">
+        update bikepoint
+        <set>
+            <if test="managerId != null">
+                manager_id = #{managerId,jdbcType=INTEGER},
+            </if>
+            <if test="pointName != null">
+                point_name = #{pointName,jdbcType=VARCHAR},
+            </if>
+            <if test="areaName != null">
+                area_name = #{areaName,jdbcType=VARCHAR},
+            </if>
+            <if test="pointRow != null">
+                point_row = #{pointRow,jdbcType=DOUBLE},
+            </if>
+            <if test="pointCol != null">
+                point_col = #{pointCol,jdbcType=DOUBLE},
+            </if>
+        </set>
+        where bikepoint_id = #{bikepointId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zq.ssm.model.Bikepoint">
+    update bikepoint
+    set manager_id = #{managerId,jdbcType=INTEGER},
+      point_name = #{pointName,jdbcType=VARCHAR},
+      area_name = #{areaName,jdbcType=VARCHAR},
+      point_row = #{pointRow,jdbcType=DOUBLE},
+      point_col = #{pointCol,jdbcType=DOUBLE}
+    where bikepoint_id = #{bikepointId,jdbcType=INTEGER}
+  </update>
+
+    <select id="selectAllBikepoint" resultMap="BaseResultMap">
+
+    select *
+    from bikepoint
+  </select>
+</mapper>

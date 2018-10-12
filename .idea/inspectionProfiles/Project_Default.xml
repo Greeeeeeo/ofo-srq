@@ -1,0 +1,36 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="AbstractClassExtendsConcreteClass" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="AbstractClassNeverImplemented" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="AbstractClassWithoutAbstractMethods" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="AbstractMethodOverridesAbstractMethod" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="AbstractMethodOverridesConcreteMethod" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="AbstractMethodWithMissingImplementations" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="ExtendsAnnotation" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
+    <inspection_tool class="ExtendsConcreteCollection" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="ExtendsUtilityClass" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="FrequentlyUsedInheritorInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
+    <inspection_tool class="ImplicitSubclassInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
+    <inspection_tool class="InterfaceMethodClashesWithObject" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
+    <inspection_tool class="InterfaceNeverImplemented" enabled="false" level="WEAK WARNING" enabled_by_default="false">
+      <option name="ignoreInterfacesThatOnlyDeclareConstants" value="false" />
+    </inspection_tool>
+    <inspection_tool class="MissingOverrideAnnotation" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoreObjectMethods" value="true" />
+      <option name="ignoreAnonymousClassMethods" value="false" />
+    </inspection_tool>
+    <inspection_tool class="NonProtectedConstructorInAbstractClass" enabled="false" level="WEAK WARNING" enabled_by_default="false">
+      <option name="m_ignoreNonPublicClasses" value="false" />
+    </inspection_tool>
+    <inspection_tool class="ParameterTypePreventsOverriding" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="ProblematicVarargsMethodOverride" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="RedundantMethodOverride" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="RefusedBequest" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoreEmptySuperMethods" value="false" />
+      <option name="onlyReportWhenAnnotated" value="true" />
+    </inspection_tool>
+    <inspection_tool class="StaticInheritance" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="TypeParameterExtendsFinalClass" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+  </profile>
+</component>

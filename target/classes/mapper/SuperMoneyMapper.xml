@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zq.ssm.dao.SuperMoneyMapper" >
+  <resultMap id="BaseResultMap" type="com.zq.ssm.model.SuperMoney" >
+    <id column="super_money_id" property="superMoneyId" jdbcType="INTEGER" />
+    <result column="super_maoney_expend" property="superMaoneyExpend" jdbcType="REAL" />
+    <result column="super_date" property="superDate" jdbcType="DATE" />
+    <result column="super_money_income" property="superMoneyIncome" jdbcType="REAL" />
+    <result column="super_money_surplus" property="superMoneySurplus" jdbcType="REAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    super_money_id, super_maoney_expend, super_date, super_money_income, super_money_surplus
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from super_money
+    where super_money_id = #{superMoneyId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from super_money
+    where super_money_id = #{superMoneyId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zq.ssm.model.SuperMoney" >
+    insert into super_money (super_money_id, super_maoney_expend, super_date, 
+      super_money_income, super_money_surplus)
+    values (#{superMoneyId,jdbcType=INTEGER}, #{superMaoneyExpend,jdbcType=REAL}, #{superDate,jdbcType=DATE}, 
+      #{superMoneyIncome,jdbcType=REAL}, #{superMoneySurplus,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zq.ssm.model.SuperMoney" >
+    insert into super_money
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="superMoneyId != null" >
+        super_money_id,
+      </if>
+      <if test="superMaoneyExpend != null" >
+        super_maoney_expend,
+      </if>
+      <if test="superDate != null" >
+        super_date,
+      </if>
+      <if test="superMoneyIncome != null" >
+        super_money_income,
+      </if>
+      <if test="superMoneySurplus != null" >
+        super_money_surplus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="superMoneyId != null" >
+        #{superMoneyId,jdbcType=INTEGER},
+      </if>
+      <if test="superMaoneyExpend != null" >
+        #{superMaoneyExpend,jdbcType=REAL},
+      </if>
+      <if test="superDate != null" >
+        #{superDate,jdbcType=DATE},
+      </if>
+      <if test="superMoneyIncome != null" >
+        #{superMoneyIncome,jdbcType=REAL},
+      </if>
+      <if test="superMoneySurplus != null" >
+        #{superMoneySurplus,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zq.ssm.model.SuperMoney" >
+    update super_money
+    <set >
+      <if test="superMaoneyExpend != null" >
+        super_maoney_expend = #{superMaoneyExpend,jdbcType=REAL},
+      </if>
+      <if test="superDate != null" >
+        super_date = #{superDate,jdbcType=DATE},
+      </if>
+      <if test="superMoneyIncome != null" >
+        super_money_income = #{superMoneyIncome,jdbcType=REAL},
+      </if>
+      <if test="superMoneySurplus != null" >
+        super_money_surplus = #{superMoneySurplus,jdbcType=REAL},
+      </if>
+    </set>
+    where super_money_id = #{superMoneyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zq.ssm.model.SuperMoney" >
+    update super_money
+    set super_maoney_expend = #{superMaoneyExpend,jdbcType=REAL},
+      super_date = #{superDate,jdbcType=DATE},
+      super_money_income = #{superMoneyIncome,jdbcType=REAL},
+      super_money_surplus = #{superMoneySurplus,jdbcType=REAL}
+    where super_money_id = #{superMoneyId,jdbcType=INTEGER}
+  </update>
+</mapper>

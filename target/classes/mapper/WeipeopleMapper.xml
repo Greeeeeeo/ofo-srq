@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zq.ssm.dao.WeipeopleMapper">
+    <resultMap id="BaseResultMap" type="com.zq.ssm.model.Weipeople">
+        <id column="wei_id" property="weiId" jdbcType="INTEGER"/>
+        <result column="wei_name" property="weiName" jdbcType="VARCHAR"/>
+        <result column="wei_sex" property="weiSex" jdbcType="VARCHAR"/>
+        <result column="wei_age" property="weiAge" jdbcType="INTEGER"/>
+        <result column="wei_tel" property="weiTel" jdbcType="VARCHAR"/>
+        <result column="wei_password" property="weiPassword" jdbcType="VARCHAR"/>
+        <result column="wei_state" property="weiState" jdbcType="VARCHAR"/>
+        <result column="manager_id" property="managerId" jdbcType="INTEGER"/>
+        <result column="wei_confirm" property="weiConfirm" jdbcType="VARCHAR"/>
+        <result column="wei_confirm1" property="weiConfirm1" jdbcType="VARCHAR"/>
+        <result column="wei_date" property="weiDate" jdbcType="DATE"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    wei_id, wei_name, wei_sex, wei_age, wei_tel, wei_password, wei_state, manager_id, 
+    wei_confirm, wei_confirm1, wei_date
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from weipeople
+        where wei_id = #{weiId,jdbcType=INTEGER}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select *
+    from weipeople
+  </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from weipeople
+    where wei_id = #{weiId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.zq.ssm.model.Weipeople">
+    insert into weipeople (wei_id, wei_name, wei_sex, 
+      wei_age, wei_tel, wei_password, 
+      wei_state, manager_id, wei_confirm, 
+      wei_confirm1, wei_date)
+    values (#{weiId,jdbcType=INTEGER}, #{weiName,jdbcType=VARCHAR}, #{weiSex,jdbcType=VARCHAR}, 
+      #{weiAge,jdbcType=INTEGER}, #{weiTel,jdbcType=VARCHAR}, #{weiPassword,jdbcType=VARCHAR}, 
+      #{weiState,jdbcType=VARCHAR}, #{managerId,jdbcType=INTEGER}, #{weiConfirm,jdbcType=VARCHAR}, 
+      #{weiConfirm1,jdbcType=VARCHAR}, #{weiDate,jdbcType=DATE})
+  </insert>
+    <insert id="insertSelective" parameterType="com.zq.ssm.model.Weipeople">
+        insert into weipeople
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="weiId != null">
+                wei_id,
+            </if>
+            <if test="weiName != null">
+                wei_name,
+            </if>
+            <if test="weiSex != null">
+                wei_sex,
+            </if>
+            <if test="weiAge != null">
+                wei_age,
+            </if>
+            <if test="weiTel != null">
+                wei_tel,
+            </if>
+            <if test="weiPassword != null">
+                wei_password,
+            </if>
+            <if test="weiState != null">
+                wei_state,
+            </if>
+            <if test="managerId != null">
+                manager_id,
+            </if>
+            <if test="weiConfirm != null">
+                wei_confirm,
+            </if>
+            <if test="weiConfirm1 != null">
+                wei_confirm1,
+            </if>
+            <if test="weiDate != null">
+                wei_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="weiId != null">
+                #{weiId,jdbcType=INTEGER},
+            </if>
+            <if test="weiName != null">
+                #{weiName,jdbcType=VARCHAR},
+            </if>
+            <if test="weiSex != null">
+                #{weiSex,jdbcType=VARCHAR},
+            </if>
+            <if test="weiAge != null">
+                #{weiAge,jdbcType=INTEGER},
+            </if>
+            <if test="weiTel != null">
+                #{weiTel,jdbcType=VARCHAR},
+            </if>
+            <if test="weiPassword != null">
+                #{weiPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="weiState != null">
+                #{weiState,jdbcType=VARCHAR},
+            </if>
+            <if test="managerId != null">
+                #{managerId,jdbcType=INTEGER},
+            </if>
+            <if test="weiConfirm != null">
+                #{weiConfirm,jdbcType=VARCHAR},
+            </if>
+            <if test="weiConfirm1 != null">
+                #{weiConfirm1,jdbcType=VARCHAR},
+            </if>
+            <if test="weiDate != null">
+                #{weiDate,jdbcType=DATE},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zq.ssm.model.Weipeople">
+        update weipeople
+        <set>
+            <if test="weiName != null">
+                wei_name = #{weiName,jdbcType=VARCHAR},
+            </if>
+            <if test="weiSex != null">
+                wei_sex = #{weiSex,jdbcType=VARCHAR},
+            </if>
+            <if test="weiAge != null">
+                wei_age = #{weiAge,jdbcType=INTEGER},
+            </if>
+            <if test="weiTel != null">
+                wei_tel = #{weiTel,jdbcType=VARCHAR},
+            </if>
+            <if test="weiPassword != null">
+                wei_password = #{weiPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="weiState != null">
+                wei_state = #{weiState,jdbcType=VARCHAR},
+            </if>
+            <if test="managerId != null">
+                manager_id = #{managerId,jdbcType=INTEGER},
+            </if>
+            <if test="weiConfirm != null">
+                wei_confirm = #{weiConfirm,jdbcType=VARCHAR},
+            </if>
+            <if test="weiConfirm1 != null">
+                wei_confirm1 = #{weiConfirm1,jdbcType=VARCHAR},
+            </if>
+            <if test="weiDate != null">
+                wei_date = #{weiDate,jdbcType=DATE},
+            </if>
+        </set>
+        where wei_id = #{weiId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zq.ssm.model.Weipeople">
+    update weipeople
+    set wei_name = #{weiName,jdbcType=VARCHAR},
+      wei_sex = #{weiSex,jdbcType=VARCHAR},
+      wei_age = #{weiAge,jdbcType=INTEGER},
+      wei_tel = #{weiTel,jdbcType=VARCHAR},
+      wei_password = #{weiPassword,jdbcType=VARCHAR},
+      wei_state = #{weiState,jdbcType=VARCHAR},
+      manager_id = #{managerId,jdbcType=INTEGER},
+      wei_confirm = #{weiConfirm,jdbcType=VARCHAR},
+      wei_confirm1 = #{weiConfirm1,jdbcType=VARCHAR},
+      wei_date = #{weiDate,jdbcType=DATE}
+    where wei_id = #{weiId,jdbcType=INTEGER}
+  </update>
+</mapper>

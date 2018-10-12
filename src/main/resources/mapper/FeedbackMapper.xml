@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zq.ssm.dao.FeedbackMapper">
+    <resultMap id="BaseResultMap" type="com.zq.ssm.model.Feedback">
+        <id column="remark_id" property="remarkId" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="bike_id" property="bikeId" jdbcType="INTEGER"/>
+        <result column="manager_id" property="managerId" jdbcType="INTEGER"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="remark_type" property="remarkType" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="bike_picture" property="bikePicture" jdbcType="VARCHAR"/>
+        <result column="user_address" property="userAddress" jdbcType="VARCHAR"/>
+        <result column="reply" property="reply" jdbcType="VARCHAR"/>
+        <result column="or_reply" property="orReply" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    remark_id, user_id, bike_id, manager_id, user_name, remark_type, remark, bike_picture, 
+    user_address, reply, or_reply
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from feedback
+        where remark_id = #{remarkId,jdbcType=INTEGER}
+    </select>
+
+
+    <select id="selectAllFeedBack" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select *
+    from feedback
+  </select>
+
+    <select id="selectAllweixiu" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select *
+    from feedback
+    where remark_type = #{remarkType}
+  </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from feedback
+    where remark_id = #{remarkId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.zq.ssm.model.Feedback">
+    insert into feedback (remark_id, user_id, bike_id, 
+      manager_id, user_name, remark_type, 
+      remark, bike_picture, user_address, 
+      reply, or_reply)
+    values (#{remarkId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{bikeId,jdbcType=INTEGER}, 
+      #{managerId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{remarkType,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{bikePicture,jdbcType=VARCHAR}, #{userAddress,jdbcType=VARCHAR}, 
+      #{reply,jdbcType=VARCHAR}, #{orReply,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.zq.ssm.model.Feedback">
+        insert into feedback
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="remarkId != null">
+                remark_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="bikeId != null">
+                bike_id,
+            </if>
+            <if test="managerId != null">
+                manager_id,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="remarkType != null">
+                remark_type,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="bikePicture != null">
+                bike_picture,
+            </if>
+            <if test="userAddress != null">
+                user_address,
+            </if>
+            <if test="reply != null">
+                reply,
+            </if>
+            <if test="orReply != null">
+                or_reply,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="remarkId != null">
+                #{remarkId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="bikeId != null">
+                #{bikeId,jdbcType=INTEGER},
+            </if>
+            <if test="managerId != null">
+                #{managerId,jdbcType=INTEGER},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="remarkType != null">
+                #{remarkType,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="bikePicture != null">
+                #{bikePicture,jdbcType=VARCHAR},
+            </if>
+            <if test="userAddress != null">
+                #{userAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="reply != null">
+                #{reply,jdbcType=VARCHAR},
+            </if>
+            <if test="orReply != null">
+                #{orReply,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zq.ssm.model.Feedback">
+        update feedback
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="bikeId != null">
+                bike_id = #{bikeId,jdbcType=INTEGER},
+            </if>
+            <if test="managerId != null">
+                manager_id = #{managerId,jdbcType=INTEGER},
+            </if>
+            <if test="userName != null">
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="remarkType != null">
+                remark_type = #{remarkType,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="bikePicture != null">
+                bike_picture = #{bikePicture,jdbcType=VARCHAR},
+            </if>
+            <if test="userAddress != null">
+                user_address = #{userAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="reply != null">
+                reply = #{reply,jdbcType=VARCHAR},
+            </if>
+            <if test="orReply != null">
+                or_reply = #{orReply,jdbcType=INTEGER},
+            </if>
+        </set>
+        where remark_id = #{remarkId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zq.ssm.model.Feedback">
+    update feedback
+    set user_id = #{userId,jdbcType=INTEGER},
+      bike_id = #{bikeId,jdbcType=INTEGER},
+      manager_id = #{managerId,jdbcType=INTEGER},
+      user_name = #{userName,jdbcType=VARCHAR},
+      remark_type = #{remarkType,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      bike_picture = #{bikePicture,jdbcType=VARCHAR},
+      user_address = #{userAddress,jdbcType=VARCHAR},
+      reply = #{reply,jdbcType=VARCHAR},
+      or_reply = #{orReply,jdbcType=INTEGER}
+    where remark_id = #{remarkId,jdbcType=INTEGER}
+  </update>
+</mapper>

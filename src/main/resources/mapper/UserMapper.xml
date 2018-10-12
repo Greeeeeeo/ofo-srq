@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zq.ssm.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.zq.ssm.model.User" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_password" property="userPassword" jdbcType="VARCHAR" />
+    <result column="user_purse" property="userPurse" jdbcType="INTEGER" />
+    <result column="user_weal" property="userWeal" jdbcType="VARCHAR" />
+    <result column="user_confirm" property="userConfirm" jdbcType="VARCHAR" />
+    <result column="user_credit" property="userCredit" jdbcType="INTEGER" />
+    <result column="bond" property="bond" jdbcType="REAL" />
+    <result column="user_sex" property="userSex" jdbcType="VARCHAR" />
+    <result column="user_age" property="userAge" jdbcType="INTEGER" />
+    <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+    <result column="register" property="register" jdbcType="DATE" />
+    <result column="user_portrait" property="userPortrait" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_id, user_name, user_password, user_purse, user_weal, user_confirm, user_credit, 
+    bond, user_sex, user_age, user_phone, register, user_portrait
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectAllUser" resultMap="BaseResultMap"   >
+    select
+      *
+    from user
+
+  </select>
+
+
+  <select id="selectUserByPhone" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where user_phone = #{userPhone}
+  </select>
+
+  <select id="selectUserByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where user_name = #{userName}
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zq.ssm.model.User" >
+    insert into user (user_id, user_name, user_password, 
+      user_purse, user_weal, user_confirm, 
+      user_credit, bond, user_sex, 
+      user_age, user_phone, register, 
+      user_portrait)
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, 
+      #{userPurse,jdbcType=INTEGER}, #{userWeal,jdbcType=VARCHAR}, #{userConfirm,jdbcType=VARCHAR}, 
+      #{userCredit,jdbcType=INTEGER}, #{bond,jdbcType=REAL}, #{userSex,jdbcType=VARCHAR}, 
+      #{userAge,jdbcType=INTEGER}, #{userPhone,jdbcType=VARCHAR}, #{register,jdbcType=DATE}, 
+      #{userPortrait,jdbcType=VARCHAR})
+  </insert>
+
+  <insert id="insertUserBackId" parameterType="com.zq.ssm.model.User" >
+    <!-- selectKey 标签实现主键返回 -->
+    <!-- keyColumn:主键对应的表中的哪一列 -->
+    <!-- keyProperty：主键对应的pojo中的哪一个属性 -->
+    <!-- order：设置在执行insert语句前执行查询id的sql，在执行insert语句之后执行查询id的sql -->
+    <!-- resultType：设置返回的id的类型 -->
+    <selectKey keyColumn="user_id" keyProperty="userId" order="AFTER"
+               resultType="int">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userPassword != null" >
+        user_password,
+      </if>
+      <if test="userPurse != null" >
+        user_purse,
+      </if>
+      <if test="userWeal != null" >
+        user_weal,
+      </if>
+      <if test="userConfirm != null" >
+        user_confirm,
+      </if>
+      <if test="userCredit != null" >
+        user_credit,
+      </if>
+      <if test="bond != null" >
+        bond,
+      </if>
+      <if test="userSex != null" >
+        user_sex,
+      </if>
+      <if test="userAge != null" >
+        user_age,
+      </if>
+      <if test="userPhone != null" >
+        user_phone,
+      </if>
+      <if test="register != null" >
+        register,
+      </if>
+      <if test="userPortrait != null" >
+        user_portrait,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userPurse != null" >
+        #{userPurse,jdbcType=INTEGER},
+      </if>
+      <if test="userWeal != null" >
+        #{userWeal,jdbcType=VARCHAR},
+      </if>
+      <if test="userConfirm != null" >
+        #{userConfirm,jdbcType=VARCHAR},
+      </if>
+      <if test="userCredit != null" >
+        #{userCredit,jdbcType=INTEGER},
+      </if>
+      <if test="bond != null" >
+        #{bond,jdbcType=REAL},
+      </if>
+      <if test="userSex != null" >
+        #{userSex,jdbcType=VARCHAR},
+      </if>
+      <if test="userAge != null" >
+        #{userAge,jdbcType=INTEGER},
+      </if>
+      <if test="userPhone != null" >
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="register != null" >
+        #{register,jdbcType=DATE},
+      </if>
+      <if test="userPortrait != null" >
+        #{userPortrait,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.zq.ssm.model.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userPassword != null" >
+        user_password,
+      </if>
+      <if test="userPurse != null" >
+        user_purse,
+      </if>
+      <if test="userWeal != null" >
+        user_weal,
+      </if>
+      <if test="userConfirm != null" >
+        user_confirm,
+      </if>
+      <if test="userCredit != null" >
+        user_credit,
+      </if>
+      <if test="bond != null" >
+        bond,
+      </if>
+      <if test="userSex != null" >
+        user_sex,
+      </if>
+      <if test="userAge != null" >
+        user_age,
+      </if>
+      <if test="userPhone != null" >
+        user_phone,
+      </if>
+      <if test="register != null" >
+        register,
+      </if>
+      <if test="userPortrait != null" >
+        user_portrait,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userPurse != null" >
+        #{userPurse,jdbcType=INTEGER},
+      </if>
+      <if test="userWeal != null" >
+        #{userWeal,jdbcType=VARCHAR},
+      </if>
+      <if test="userConfirm != null" >
+        #{userConfirm,jdbcType=VARCHAR},
+      </if>
+      <if test="userCredit != null" >
+        #{userCredit,jdbcType=INTEGER},
+      </if>
+      <if test="bond != null" >
+        #{bond,jdbcType=REAL},
+      </if>
+      <if test="userSex != null" >
+        #{userSex,jdbcType=VARCHAR},
+      </if>
+      <if test="userAge != null" >
+        #{userAge,jdbcType=INTEGER},
+      </if>
+      <if test="userPhone != null" >
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="register != null" >
+        #{register,jdbcType=DATE},
+      </if>
+      <if test="userPortrait != null" >
+        #{userPortrait,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zq.ssm.model.User" >
+    update user
+    <set >
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        user_password = #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userPurse != null" >
+        user_purse = #{userPurse,jdbcType=INTEGER},
+      </if>
+      <if test="userWeal != null" >
+        user_weal = #{userWeal,jdbcType=VARCHAR},
+      </if>
+      <if test="userConfirm != null" >
+        user_confirm = #{userConfirm,jdbcType=VARCHAR},
+      </if>
+      <if test="userCredit != null" >
+        user_credit = #{userCredit,jdbcType=INTEGER},
+      </if>
+      <if test="bond != null" >
+        bond = #{bond,jdbcType=REAL},
+      </if>
+      <if test="userSex != null" >
+        user_sex = #{userSex,jdbcType=VARCHAR},
+      </if>
+      <if test="userAge != null" >
+        user_age = #{userAge,jdbcType=INTEGER},
+      </if>
+      <if test="userPhone != null" >
+        user_phone = #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="register != null" >
+        register = #{register,jdbcType=DATE},
+      </if>
+      <if test="userPortrait != null" >
+        user_portrait = #{userPortrait,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zq.ssm.model.User" >
+    update user
+    set user_name = #{userName,jdbcType=VARCHAR},
+      user_password = #{userPassword,jdbcType=VARCHAR},
+      user_purse = #{userPurse,jdbcType=INTEGER},
+      user_weal = #{userWeal,jdbcType=VARCHAR},
+      user_confirm = #{userConfirm,jdbcType=VARCHAR},
+      user_credit = #{userCredit,jdbcType=INTEGER},
+      bond = #{bond,jdbcType=REAL},
+      user_sex = #{userSex,jdbcType=VARCHAR},
+      user_age = #{userAge,jdbcType=INTEGER},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      register = #{register,jdbcType=DATE},
+      user_portrait = #{userPortrait,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>

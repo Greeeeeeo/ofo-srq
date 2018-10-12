@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zq.ssm.dao.BikeMapper">
+    <resultMap id="BaseResultMap" type="com.zq.ssm.model.Bike">
+        <id column="bike_id" property="bikeId" jdbcType="INTEGER"/>
+        <result column="bike_address" property="bikeAddress" jdbcType="VARCHAR"/>
+        <result column="bike_time" property="bikeTime" jdbcType="DATE"/>
+        <result column="bike_state" property="bikeState" jdbcType="VARCHAR"/>
+        <result column="two" property="two" jdbcType="VARCHAR"/>
+        <result column="open_psw" property="openPsw" jdbcType="VARCHAR"/>
+        <result column="manager_id" property="managerId" jdbcType="INTEGER"/>
+        <result column="bike_row" property="bikeRow" jdbcType="DOUBLE"/>
+        <result column="bike_col" property="bikeCol" jdbcType="DOUBLE"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    bike_id, bike_address, bike_time, bike_state, two, open_psw, manager_id, bike_row, 
+    bike_col
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from bike
+        where bike_id = #{bikeId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectAllBike" resultMap="BaseResultMap">
+    select * from bike
+
+  </select>
+
+    <select id="selectBikeByState" resultMap="BaseResultMap" parameterType="com.zq.ssm.model.Bike">
+        select * from bike
+
+        <where>
+            <if test="bikeState != null">
+                and bike_state like '%${bikeState}%'
+            </if>
+
+        </where>
+
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from bike
+    where bike_id = #{bikeId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.zq.ssm.model.Bike">
+    insert into bike (bike_id, bike_address, bike_time, 
+      bike_state, two, open_psw, 
+      manager_id, bike_row, bike_col
+      )
+    values (#{bikeId,jdbcType=INTEGER}, #{bikeAddress,jdbcType=VARCHAR}, #{bikeTime,jdbcType=DATE}, 
+      #{bikeState,jdbcType=VARCHAR}, #{two,jdbcType=VARCHAR}, #{openPsw,jdbcType=VARCHAR}, 
+      #{managerId,jdbcType=INTEGER}, #{bikeRow,jdbcType=DOUBLE}, #{bikeCol,jdbcType=DOUBLE}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.zq.ssm.model.Bike">
+        insert into bike
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="bikeId != null">
+                bike_id,
+            </if>
+            <if test="bikeAddress != null">
+                bike_address,
+            </if>
+            <if test="bikeTime != null">
+                bike_time,
+            </if>
+            <if test="bikeState != null">
+                bike_state,
+            </if>
+            <if test="two != null">
+                two,
+            </if>
+            <if test="openPsw != null">
+                open_psw,
+            </if>
+            <if test="managerId != null">
+                manager_id,
+            </if>
+            <if test="bikeRow != null">
+                bike_row,
+            </if>
+            <if test="bikeCol != null">
+                bike_col,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="bikeId != null">
+                #{bikeId,jdbcType=INTEGER},
+            </if>
+            <if test="bikeAddress != null">
+                #{bikeAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="bikeTime != null">
+                #{bikeTime,jdbcType=DATE},
+            </if>
+            <if test="bikeState != null">
+                #{bikeState,jdbcType=VARCHAR},
+            </if>
+            <if test="two != null">
+                #{two,jdbcType=VARCHAR},
+            </if>
+            <if test="openPsw != null">
+                #{openPsw,jdbcType=VARCHAR},
+            </if>
+            <if test="managerId != null">
+                #{managerId,jdbcType=INTEGER},
+            </if>
+            <if test="bikeRow != null">
+                #{bikeRow,jdbcType=DOUBLE},
+            </if>
+            <if test="bikeCol != null">
+                #{bikeCol,jdbcType=DOUBLE},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zq.ssm.model.Bike">
+        update bike
+        <set>
+            <if test="bikeAddress != null">
+                bike_address = #{bikeAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="bikeTime != null">
+                bike_time = #{bikeTime,jdbcType=DATE},
+            </if>
+            <if test="bikeState != null">
+                bike_state = #{bikeState,jdbcType=VARCHAR},
+            </if>
+            <if test="two != null">
+                two = #{two,jdbcType=VARCHAR},
+            </if>
+            <if test="openPsw != null">
+                open_psw = #{openPsw,jdbcType=VARCHAR},
+            </if>
+            <if test="managerId != null">
+                manager_id = #{managerId,jdbcType=INTEGER},
+            </if>
+            <if test="bikeRow != null">
+                bike_row = #{bikeRow,jdbcType=DOUBLE},
+            </if>
+            <if test="bikeCol != null">
+                bike_col = #{bikeCol,jdbcType=DOUBLE},
+            </if>
+        </set>
+        where bike_id = #{bikeId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zq.ssm.model.Bike">
+    update bike
+    set bike_address = #{bikeAddress,jdbcType=VARCHAR},
+      bike_time = #{bikeTime,jdbcType=DATE},
+      bike_state = #{bikeState,jdbcType=VARCHAR},
+      two = #{two,jdbcType=VARCHAR},
+      open_psw = #{openPsw,jdbcType=VARCHAR},
+      manager_id = #{managerId,jdbcType=INTEGER},
+      bike_row = #{bikeRow,jdbcType=DOUBLE},
+      bike_col = #{bikeCol,jdbcType=DOUBLE}
+    where bike_id = #{bikeId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zq.ssm.dao.RunbikeMapper" >
+  <resultMap id="BaseResultMap" type="com.zq.ssm.model.Runbike" >
+    <id column="run_bike_id" property="runBikeId" jdbcType="INTEGER" />
+    <result column="bike_id" property="bikeId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="run_address_start" property="runAddressStart" jdbcType="VARCHAR" />
+    <result column="run_address_end" property="runAddressEnd" jdbcType="VARCHAR" />
+    <result column="run_time_start" property="runTimeStart" jdbcType="TIMESTAMP" />
+    <result column="run_time_end" property="runTimeEnd" jdbcType="TIMESTAMP" />
+    <result column="run_pay" property="runPay" jdbcType="REAL" />
+    <result column="orpay" property="orpay" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    run_bike_id, bike_id, user_id, user_name, run_address_start, run_address_end, run_time_start, 
+    run_time_end, run_pay, orpay
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from runbike
+    where run_bike_id = #{runBikeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from runbike
+    where run_bike_id = #{runBikeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zq.ssm.model.Runbike" >
+    insert into runbike (run_bike_id, bike_id, user_id, 
+      user_name, run_address_start, run_address_end, 
+      run_time_start, run_time_end, run_pay, 
+      orpay)
+    values (#{runBikeId,jdbcType=INTEGER}, #{bikeId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{userName,jdbcType=VARCHAR}, #{runAddressStart,jdbcType=VARCHAR}, #{runAddressEnd,jdbcType=VARCHAR}, 
+      #{runTimeStart,jdbcType=TIMESTAMP}, #{runTimeEnd,jdbcType=TIMESTAMP}, #{runPay,jdbcType=REAL}, 
+      #{orpay,jdbcType=BIT})
+  </insert>
+
+    <insert id="insertBackId" parameterType="com.zq.ssm.model.Runbike" useGeneratedKeys="true" keyProperty="runBikeId">
+        insert into runbike (run_bike_id, bike_id, user_id,
+                             user_name, run_address_start, run_address_end,
+                             run_time_start, run_time_end, run_pay,
+                             orpay)
+        values (#{runBikeId,jdbcType=INTEGER}, #{bikeId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER},
+                #{userName,jdbcType=VARCHAR}, #{runAddressStart,jdbcType=VARCHAR}, #{runAddressEnd,jdbcType=VARCHAR},
+                #{runTimeStart,jdbcType=TIMESTAMP}, #{runTimeEnd,jdbcType=TIMESTAMP}, #{runPay,jdbcType=REAL},
+                #{orpay,jdbcType=BIT})
+    </insert>
+  <insert id="insertSelective" parameterType="com.zq.ssm.model.Runbike" >
+    insert into runbike
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="runBikeId != null" >
+        run_bike_id,
+      </if>
+      <if test="bikeId != null" >
+        bike_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="runAddressStart != null" >
+        run_address_start,
+      </if>
+      <if test="runAddressEnd != null" >
+        run_address_end,
+      </if>
+      <if test="runTimeStart != null" >
+        run_time_start,
+      </if>
+      <if test="runTimeEnd != null" >
+        run_time_end,
+      </if>
+      <if test="runPay != null" >
+        run_pay,
+      </if>
+      <if test="orpay != null" >
+        orpay,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="runBikeId != null" >
+        #{runBikeId,jdbcType=INTEGER},
+      </if>
+      <if test="bikeId != null" >
+        #{bikeId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="runAddressStart != null" >
+        #{runAddressStart,jdbcType=VARCHAR},
+      </if>
+      <if test="runAddressEnd != null" >
+        #{runAddressEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="runTimeStart != null" >
+        #{runTimeStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="runTimeEnd != null" >
+        #{runTimeEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="runPay != null" >
+        #{runPay,jdbcType=REAL},
+      </if>
+      <if test="orpay != null" >
+        #{orpay,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+
+  <insert id="insertSelectiveBackId"  parameterType="com.zq.ssm.model.Runbike"  useGeneratedKeys="true" keyProperty="runBikeId">
+
+    <!--<selectKey resultType="int" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID() AS runBikeId
+    </selectKey>-->
+    insert into runbike
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="runBikeId != null" >
+        run_bike_id,
+      </if>
+      <if test="bikeId != null" >
+        bike_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="runAddressStart != null" >
+        run_address_start,
+      </if>
+      <if test="runAddressEnd != null" >
+        run_address_end,
+      </if>
+      <if test="runTimeStart != null" >
+        run_time_start,
+      </if>
+      <if test="runTimeEnd != null" >
+        run_time_end,
+      </if>
+      <if test="runPay != null" >
+        run_pay,
+      </if>
+      <if test="orpay != null" >
+        orpay,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="runBikeId != null" >
+        #{runBikeId,jdbcType=INTEGER},
+      </if>
+      <if test="bikeId != null" >
+        #{bikeId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="runAddressStart != null" >
+        #{runAddressStart,jdbcType=VARCHAR},
+      </if>
+      <if test="runAddressEnd != null" >
+        #{runAddressEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="runTimeStart != null" >
+        #{runTimeStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="runTimeEnd != null" >
+        #{runTimeEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="runPay != null" >
+        #{runPay,jdbcType=REAL},
+      </if>
+      <if test="orpay != null" >
+        #{orpay,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.zq.ssm.model.Runbike" >
+    update runbike
+    <set >
+      <if test="bikeId != null" >
+        bike_id = #{bikeId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="runAddressStart != null" >
+        run_address_start = #{runAddressStart,jdbcType=VARCHAR},
+      </if>
+      <if test="runAddressEnd != null" >
+        run_address_end = #{runAddressEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="runTimeStart != null" >
+        run_time_start = #{runTimeStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="runTimeEnd != null" >
+        run_time_end = #{runTimeEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="runPay != null" >
+        run_pay = #{runPay,jdbcType=REAL},
+      </if>
+      <if test="orpay != null" >
+        orpay = #{orpay,jdbcType=BIT},
+      </if>
+    </set>
+    where run_bike_id = #{runBikeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zq.ssm.model.Runbike" >
+    update runbike
+    set bike_id = #{bikeId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      user_name = #{userName,jdbcType=VARCHAR},
+      run_address_start = #{runAddressStart,jdbcType=VARCHAR},
+      run_address_end = #{runAddressEnd,jdbcType=VARCHAR},
+      run_time_start = #{runTimeStart,jdbcType=TIMESTAMP},
+      run_time_end = #{runTimeEnd,jdbcType=TIMESTAMP},
+      run_pay = #{runPay,jdbcType=REAL},
+      orpay = #{orpay,jdbcType=BIT}
+    where run_bike_id = #{runBikeId,jdbcType=INTEGER}
+  </update>
+</mapper>

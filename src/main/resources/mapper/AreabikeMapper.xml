@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zq.ssm.dao.AreabikeMapper" >
+  <resultMap id="BaseResultMap" type="com.zq.ssm.model.Areabike" >
+    <id column="area_id" property="areaId" jdbcType="INTEGER" />
+    <result column="area_name" property="areaName" jdbcType="VARCHAR" />
+    <result column="area_bike_max" property="areaBikeMax" jdbcType="INTEGER" />
+    <result column="area_bike_min" property="areaBikeMin" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    area_id, area_name, area_bike_max, area_bike_min
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from areabike
+    where area_id = #{areaId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from areabike
+    where area_id = #{areaId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zq.ssm.model.Areabike" >
+    insert into areabike (area_id, area_name, area_bike_max, 
+      area_bike_min)
+    values (#{areaId,jdbcType=INTEGER}, #{areaName,jdbcType=VARCHAR}, #{areaBikeMax,jdbcType=INTEGER}, 
+      #{areaBikeMin,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zq.ssm.model.Areabike" >
+    insert into areabike
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="areaId != null" >
+        area_id,
+      </if>
+      <if test="areaName != null" >
+        area_name,
+      </if>
+      <if test="areaBikeMax != null" >
+        area_bike_max,
+      </if>
+      <if test="areaBikeMin != null" >
+        area_bike_min,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="areaId != null" >
+        #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="areaName != null" >
+        #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaBikeMax != null" >
+        #{areaBikeMax,jdbcType=INTEGER},
+      </if>
+      <if test="areaBikeMin != null" >
+        #{areaBikeMin,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zq.ssm.model.Areabike" >
+    update areabike
+    <set >
+      <if test="areaName != null" >
+        area_name = #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaBikeMax != null" >
+        area_bike_max = #{areaBikeMax,jdbcType=INTEGER},
+      </if>
+      <if test="areaBikeMin != null" >
+        area_bike_min = #{areaBikeMin,jdbcType=INTEGER},
+      </if>
+    </set>
+    where area_id = #{areaId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zq.ssm.model.Areabike" >
+    update areabike
+    set area_name = #{areaName,jdbcType=VARCHAR},
+      area_bike_max = #{areaBikeMax,jdbcType=INTEGER},
+      area_bike_min = #{areaBikeMin,jdbcType=INTEGER}
+    where area_id = #{areaId,jdbcType=INTEGER}
+  </update>
+
+  <select id="SelectforAreaForBike" resultMap="BaseResultMap">
+		select * from areabike
+	</select>
+
+</mapper>

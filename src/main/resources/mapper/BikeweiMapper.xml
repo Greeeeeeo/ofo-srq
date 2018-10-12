@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zq.ssm.dao.BikeweiMapper" >
+  <resultMap id="BaseResultMap" type="com.zq.ssm.model.Bikewei" >
+    <id column="bike_wei_id" property="bikeWeiId" jdbcType="INTEGER" />
+    <result column="bike_id" property="bikeId" jdbcType="INTEGER" />
+    <result column="wei_date" property="weiDate" jdbcType="DATE" />
+    <result column="wei_id" property="weiId" jdbcType="INTEGER" />
+    <result column="wei_name" property="weiName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    bike_wei_id, bike_id, wei_date, wei_id, wei_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from bikewei
+    where bike_wei_id = #{bikeWeiId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from bikewei
+    where bike_wei_id = #{bikeWeiId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zq.ssm.model.Bikewei" >
+    insert into bikewei (bike_wei_id, bike_id, wei_date, 
+      wei_id, wei_name)
+    values (#{bikeWeiId,jdbcType=INTEGER}, #{bikeId,jdbcType=INTEGER}, #{weiDate,jdbcType=DATE}, 
+      #{weiId,jdbcType=INTEGER}, #{weiName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zq.ssm.model.Bikewei" >
+    insert into bikewei
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bikeWeiId != null" >
+        bike_wei_id,
+      </if>
+      <if test="bikeId != null" >
+        bike_id,
+      </if>
+      <if test="weiDate != null" >
+        wei_date,
+      </if>
+      <if test="weiId != null" >
+        wei_id,
+      </if>
+      <if test="weiName != null" >
+        wei_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bikeWeiId != null" >
+        #{bikeWeiId,jdbcType=INTEGER},
+      </if>
+      <if test="bikeId != null" >
+        #{bikeId,jdbcType=INTEGER},
+      </if>
+      <if test="weiDate != null" >
+        #{weiDate,jdbcType=DATE},
+      </if>
+      <if test="weiId != null" >
+        #{weiId,jdbcType=INTEGER},
+      </if>
+      <if test="weiName != null" >
+        #{weiName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zq.ssm.model.Bikewei" >
+    update bikewei
+    <set >
+      <if test="bikeId != null" >
+        bike_id = #{bikeId,jdbcType=INTEGER},
+      </if>
+      <if test="weiDate != null" >
+        wei_date = #{weiDate,jdbcType=DATE},
+      </if>
+      <if test="weiId != null" >
+        wei_id = #{weiId,jdbcType=INTEGER},
+      </if>
+      <if test="weiName != null" >
+        wei_name = #{weiName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where bike_wei_id = #{bikeWeiId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zq.ssm.model.Bikewei" >
+    update bikewei
+    set bike_id = #{bikeId,jdbcType=INTEGER},
+      wei_date = #{weiDate,jdbcType=DATE},
+      wei_id = #{weiId,jdbcType=INTEGER},
+      wei_name = #{weiName,jdbcType=VARCHAR}
+    where bike_wei_id = #{bikeWeiId,jdbcType=INTEGER}
+  </update>
+</mapper>

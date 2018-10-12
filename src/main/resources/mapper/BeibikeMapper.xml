@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zq.ssm.dao.BeibikeMapper" >
+  <resultMap id="BaseResultMap" type="com.zq.ssm.model.Beibike" >
+    <id column="bike_id" property="bikeId" jdbcType="INTEGER" />
+    <result column="two" property="two" jdbcType="VARCHAR" />
+    <result column="open_psw" property="openPsw" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    bike_id, two, open_psw
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from beibike
+    where bike_id = #{bikeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from beibike
+    where bike_id = #{bikeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zq.ssm.model.Beibike" >
+    insert into beibike (bike_id, two, open_psw
+      )
+    values (#{bikeId,jdbcType=INTEGER}, #{two,jdbcType=VARCHAR}, #{openPsw,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zq.ssm.model.Beibike" >
+    insert into beibike
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bikeId != null" >
+        bike_id,
+      </if>
+      <if test="two != null" >
+        two,
+      </if>
+      <if test="openPsw != null" >
+        open_psw,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bikeId != null" >
+        #{bikeId,jdbcType=INTEGER},
+      </if>
+      <if test="two != null" >
+        #{two,jdbcType=VARCHAR},
+      </if>
+      <if test="openPsw != null" >
+        #{openPsw,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zq.ssm.model.Beibike" >
+    update beibike
+    <set >
+      <if test="two != null" >
+        two = #{two,jdbcType=VARCHAR},
+      </if>
+      <if test="openPsw != null" >
+        open_psw = #{openPsw,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where bike_id = #{bikeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zq.ssm.model.Beibike" >
+    update beibike
+    set two = #{two,jdbcType=VARCHAR},
+      open_psw = #{openPsw,jdbcType=VARCHAR}
+    where bike_id = #{bikeId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zq.ssm.dao.AreamanagerMapper" >
+  <resultMap id="BaseResultMap" type="com.zq.ssm.model.Areamanager" >
+    <id column="manager_id" property="managerId" jdbcType="INTEGER" />
+    <result column="area_id" property="areaId" jdbcType="INTEGER" />
+    <result column="area_name" property="areaName" jdbcType="VARCHAR" />
+    <result column="manager_name" property="managerName" jdbcType="VARCHAR" />
+    <result column="manager_sex" property="managerSex" jdbcType="VARCHAR" />
+    <result column="manager_age" property="managerAge" jdbcType="INTEGER" />
+    <result column="manager_tel" property="managerTel" jdbcType="VARCHAR" />
+    <result column="managerPassword" property="managerpassword" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    manager_id, area_id, area_name, manager_name, manager_sex, manager_age, manager_tel, 
+    managerPassword
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from areamanager
+    where manager_id = #{managerId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from areamanager
+    where manager_id = #{managerId,jdbcType=INTEGER}
+  </delete>
+
+  <!-- 批量删除员工信息 -->
+  <delete id="batchDeleteAreamanager" parameterType="int">
+    delete from areamanager where manager_id in
+    <foreach item="areamanagerItem" collection="list" open="(" separator="," close=")">
+      #{empnoItem}
+    </foreach>
+  </delete>
+
+  <insert id="insert" parameterType="com.zq.ssm.model.Areamanager" >
+    insert into areamanager (manager_id, area_id, area_name, 
+      manager_name, manager_sex, manager_age, 
+      manager_tel, managerPassword)
+    values (#{managerId,jdbcType=INTEGER}, #{areaId,jdbcType=INTEGER}, #{areaName,jdbcType=VARCHAR}, 
+      #{managerName,jdbcType=VARCHAR}, #{managerSex,jdbcType=VARCHAR}, #{managerAge,jdbcType=INTEGER}, 
+      #{managerTel,jdbcType=VARCHAR}, #{managerpassword,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zq.ssm.model.Areamanager" >
+    insert into areamanager
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="managerId != null" >
+        manager_id,
+      </if>
+      <if test="areaId != null" >
+        area_id,
+      </if>
+      <if test="areaName != null" >
+        area_name,
+      </if>
+      <if test="managerName != null" >
+        manager_name,
+      </if>
+      <if test="managerSex != null" >
+        manager_sex,
+      </if>
+      <if test="managerAge != null" >
+        manager_age,
+      </if>
+      <if test="managerTel != null" >
+        manager_tel,
+      </if>
+      <if test="managerpassword != null" >
+        managerPassword,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="managerId != null" >
+        #{managerId,jdbcType=INTEGER},
+      </if>
+      <if test="areaId != null" >
+        #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="areaName != null" >
+        #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="managerName != null" >
+        #{managerName,jdbcType=VARCHAR},
+      </if>
+      <if test="managerSex != null" >
+        #{managerSex,jdbcType=VARCHAR},
+      </if>
+      <if test="managerAge != null" >
+        #{managerAge,jdbcType=INTEGER},
+      </if>
+      <if test="managerTel != null" >
+        #{managerTel,jdbcType=VARCHAR},
+      </if>
+      <if test="managerpassword != null" >
+        #{managerpassword,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zq.ssm.model.Areamanager" >
+    update areamanager
+    <set >
+      <if test="areaId != null" >
+        area_id = #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="areaName != null" >
+        area_name = #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="managerName != null" >
+        manager_name = #{managerName,jdbcType=VARCHAR},
+      </if>
+      <if test="managerSex != null" >
+        manager_sex = #{managerSex,jdbcType=VARCHAR},
+      </if>
+      <if test="managerAge != null" >
+        manager_age = #{managerAge,jdbcType=INTEGER},
+      </if>
+      <if test="managerTel != null" >
+        manager_tel = #{managerTel,jdbcType=VARCHAR},
+      </if>
+      <if test="managerpassword != null" >
+        managerPassword = #{managerpassword,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where manager_id = #{managerId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zq.ssm.model.Areamanager" >
+    update areamanager
+    set area_id = #{areaId,jdbcType=INTEGER},
+      area_name = #{areaName,jdbcType=VARCHAR},
+      manager_name = #{managerName,jdbcType=VARCHAR},
+      manager_sex = #{managerSex,jdbcType=VARCHAR},
+      manager_age = #{managerAge,jdbcType=INTEGER},
+      manager_tel = #{managerTel,jdbcType=VARCHAR},
+      managerPassword = #{managerpassword,jdbcType=VARCHAR}
+    where manager_id = #{managerId,jdbcType=INTEGER}
+  </update>
+
+  <select id="SelectAllAreaManager" resultMap="BaseResultMap">
+		select * from areamanager
+	</select>
+
+  <select id="SelectAreaManagerForAreaNameOrAreaManagerName" resultMap="BaseResultMap" parameterType="com.zq.ssm.model.Areamanager">
+		select * from areamanager
+       <where>
+        <if test="areaName != null" >
+        and   area_name = #{areaName}
+        </if>
+
+        <if test="managerName != null" >
+        and  manager_name like '%${managerName}%'
+        </if>
+       </where>
+	</select>
+
+</mapper>
